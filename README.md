@@ -19,10 +19,19 @@ Questions in tcp_server.c:
 
 1. They're command line parameters. argc is the number of arguments in the command line and argv is an array of the entered commands.
 
-***REWORD 2 
+2. A UNIX file descriptor is a small integer that represents an open file or resource in UNIX, and a UNIX file descriptor table maps the file descriptor to actual structs in the kernel that manage the resource.
 
-2. A UNIX file descriptor is a small integer that represents an open file or resource in UNIX and a UNIX file descriptor table maps the file descriptor to actual structs in the kernel that manage the resource.
+3. A struct is a blueprint for a custom data type. It is basically a class except everything is inherently public unless otherwise specified. The structure of sockaddr_in contains attributes for the address family, port, and a specific internet address (sin_addr).
 
-3. A struct is a blueprint for a custom data type. It is basically a class except everything is inherently public unless otherwise specified. The structure of sockaddr_in 
+4. The input parameters of socket() are an address family, the socket type, and the protocol. The address family defines which family of address the socket can communicate with. In the code this is AF_INET which is IPv4. The output of socket() is a flag that indicates whether the connection was a success (0 for success, -1 for failure).
 
-4. The input parameters of socket() are an address family, the socket type, and the protocol. The address family defines which family of address the socket can communicate with. In the code this is AF_INET which is ____. The socket type defines 
+5. The input parameters for bind() are sockfd, a descriptor from socket(), addr, a pointer to the structure address, and addrlen, the size of the structure. The input parameters for listen() are sockfd, which is a socket descriptor, and backlog, which tracks the number of qeueued pending connections.
+
+6. We use while(1), as it creates an infinite loop, allowing the port to always stay listening. It can handle multiple incoming clients at once. The main issue is that this implementation is sequential, meaning some incoming requests can be missed while the while loop is not running.
+
+7. fork() creates a new child process that copies its parent process. In a server, the parent listens for connections, the child process handles all read/write, and the parents handles the accept().
+
+8. A system call is the way that a user or a program in user mode can actually make an action in the kernel. It provides an interface of actions that allow kernel access, giving us access to kernel functions.
+
+***Remote Server Questions***
+1. No LLM used.
